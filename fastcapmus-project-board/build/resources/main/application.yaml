@@ -15,8 +15,8 @@ logging:
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/board
-    username: aleks
-    password: wjqthr12!@
+    username: root
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     defer-datasource-initialization: true
@@ -31,10 +31,19 @@ spring:
   h2:
     console:
       enabled: false
+  sql:
+    init:
+      mode: always
   data:
     rest:
       base-path: /api
       detection-strategy: annotated
   config:
+    activate:
+      on-profile:
+
+
+
+config:
     activate:
       on-profile: testdb

@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FastCampustProjectBoardApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(FastCampustProjectBoardApplication.class, args);
 	}
 
