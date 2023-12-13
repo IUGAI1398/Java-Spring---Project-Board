@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,11 +25,14 @@ import java.util.Set;
         @Index(columnList = "createdBy")
 
 })
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Article {
+
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private  Long id;
+
     @Setter @Column(nullable = false) private  String title;
     @Setter @Column(nullable = false)  private  String content;
     @Setter  private  String hashtag;
@@ -39,7 +44,8 @@ public class Article {
 
 
 
-    @CreatedBy @Column(nullable = false)  private LocalDateTime createdAt;
+    @CreatedDate
+    @Column(nullable = false)  private LocalDateTime createdAt;
     @CreatedBy @Column(nullable = false, length = 100) private  String createdBy;
     @LastModifiedDate @Column(nullable = false) private  LocalDateTime modifiedAt;
     @LastModifiedBy  @Column(nullable = false, length = 100) private  String modifiedby;
@@ -59,12 +65,13 @@ public class Article {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Article article)) return false;
-        return id != null && id.equals(article.id);
+        if (!(o instanceof Article that)) return false;
+        return this.getId() != null && this.getId().equals(that.getId());
     }
+
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(this.getId());
     }
 }
