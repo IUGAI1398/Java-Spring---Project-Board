@@ -18,6 +18,7 @@ import java.util.Set;
 
 @Getter
 @ToString
+@EntityListeners(AuditingEntityListener.class)
 @Table(indexes = {
         @Index(columnList = "title"),
         @Index(columnList = "hashtag"),
@@ -25,9 +26,9 @@ import java.util.Set;
         @Index(columnList = "createdBy")
 
 })
-@EntityListeners(AuditingEntityListener.class)
+
 @Entity
-public class Article {
+public class Article  extends  AuditingFields{
 
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
@@ -43,12 +44,6 @@ public class Article {
     private  final Set<ArticleComment> articleCommentSet = new LinkedHashSet<>();
 
 
-
-    @CreatedDate
-    @Column(nullable = false)  private LocalDateTime createdAt;
-    @CreatedBy @Column(nullable = false, length = 100) private  String createdBy;
-    @LastModifiedDate @Column(nullable = false) private  LocalDateTime modifiedAt;
-    @LastModifiedBy  @Column(nullable = false, length = 100) private  String modifiedby;
 
     protected Article() {
     }
