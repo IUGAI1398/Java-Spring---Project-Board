@@ -33,7 +33,7 @@ class JpaRepositoryTest {
 
         assertThat(articles)
                 .isNotNull()
-                .hasSize(1); // classpath:resources/data.sql 참조
+                .hasSize(2); // classpath:resources/data.sql 참조
     }
 
     @DisplayName("insert 테스트")
